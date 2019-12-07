@@ -6,8 +6,8 @@ adventofcode solutions.
 Will create folder structure `/year/day#`, download the input file for that day from adventofcode.com, and create a stub function.
 
 ```
-/2018
-└ /day1
+2018/
+└ day1/
   ├ day1.js
   └ day1.input
 ```
