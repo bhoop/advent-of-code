@@ -3,7 +3,7 @@ adventofcode solutions.
 ## Setup files for a new day's challenge:
 > `$ npm run start [day #]`
 
-Will create folder structure `/year/day#`, download the input file for that day from adventofcode.com, and create a stub function.
+Will create folder structure `/year/day#`, inside which will be a file to paste the day's input into (`day#.input`), and a file to hold the day's code (`day#.js`).
 
 ```
 2018/

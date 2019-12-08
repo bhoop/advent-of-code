@@ -18,21 +18,9 @@ if (DAY === "") {
       console.log(`setup day ${DAY} (${YEAR})`);
       fs.mkdirSync(DIR, { recursive:true });
 
-      if (!fs.existsSync(INPUT)) {
-        const file = fs.createWriteStream(INPUT);
-        try {
-          https.get(`https://adventofcode.com/${YEAR}/day/${DAY}/input`, response => {
-            response.pipe(file);
-          });
-        } catch (err) {
-          console.log("Could not download input file, creating empty one");
-          file.close();
-          fs.writeFileSync(INPUT, '');
-        }
-      }
-
+      if (!fs.existsSync(INPUT)) fs.writeFileSync(INPUT, '');
       if (!fs.existsSync(SRC)) {
-        fs.writeFileSync(SRC, `\n\nmodule.exports = function(input) {\nconsole.log('Answer:', '???');\n}\n`);
+        fs.writeFileSync(SRC, `\n\nmodule.exports = function(input) {\n  console.log('Answer:', '???');\n}\n`);
       }
 
       console.log(`Done! Use:\n$ npm run day ${DAY}\n(OR)\n$ npm run day ${DAY} ${YEAR}`);
