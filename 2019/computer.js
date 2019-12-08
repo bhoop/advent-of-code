@@ -1,8 +1,3 @@
-function get(addresses, memory) {
-  if (Array.isArray(addresses)) return addresses.map(i => p(i, memory));
-  return memory[addresses];
-}
-
 const DEBUG = false;
 
 const OP_ADD = 1;
@@ -45,7 +40,7 @@ function exec({program, i, inputs}) {
 
   let $p = {};
   const p = (x, write = false) => {
-    if (write || paramModes[x-1] === 1) {
+    if (write || paramModes[x-1] === PMODE_IMMEDIATE) {
       $p[x] = `{${write?'W':'I'}@${i+x}:${program[i+x]}}`;
       return program[i + x];
     }
@@ -118,33 +113,6 @@ function exec({program, i, inputs}) {
     default: throw `UNKNOWN OP: ${op}`;
   }
 
-  // const op = p(address);
-  // let ret = [...memory];
-  // let next = address;
-  // // console.log("COMPUTE", `[${address}]\t${p(address)}\t${p(address+1)}\t${p(address+2)}\t${p(address+3)}`);
-  // // console.log("#", ret.join(","));
-  // switch (op) {
-  //   // add
-  //   case 1:
-  //     ret[p(address+3)] = v(address+1) + v(address+2);
-  //     next += 4;
-  //     break;
-
-  //   // multiply
-  //   case 2:
-  //     ret[p(address+3)] = v(address+1) * v(address+2);
-  //     next += 4;
-  //     break;
-
-  //   // end of program
-  //   case 99:
-  //     next = false;
-  //     break;
-  //   default:
-  //     throw `unknown op: ${op}`;
-  // }
-  // // console.log(">", ret.join(","));
-  // return [ret, next];
 }
 
 function runProgram({program, inputs}) {
