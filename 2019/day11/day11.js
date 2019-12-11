@@ -25,9 +25,18 @@ const TURNS = {
   ]
 }
 
+const BLACK = 0;
+const WHITE = 1;
+const COLORS = {
+  [BLACK]: '\x1b[40m \x1b[0m',
+  [WHITE]: '\x1b[47m \x1b[0m',
+};
+
 module.exports = function([input]) {
   let program = input.split(',').map(n => Number(n));
-  let state = { program, i:0, inputs:[0], outputs:[] };
+  let state = { program, i:0, rbase:0, inputs:[ 1 ], outputs:[] };
+
+  console.log(state);
 
   let painted = {};
   let x = 0;
@@ -69,6 +78,14 @@ module.exports = function([input]) {
         nextOutputPaints = !nextOutputPaints;
       }
     });
+  }
+
+  for (let y = yMax; y >= yMin; y--) {
+    let row = [];
+    for (let x = xMin; x <= xMax; x++) {
+      row.push( COLORS[ painted[`${x},${y}`] || 0 ] );
+    }
+    console.log(row.join(''));
   }
 
   console.log("PAINTED", Object.keys(painted).length);
